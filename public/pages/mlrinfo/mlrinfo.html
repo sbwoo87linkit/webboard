@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="side-title">
+        <h5>MLR INFO</h5>
+      </div>
+
+      <div class="list-group">
+        <a ng-class="{'w3-theme-active':$state.is('mlrinfo.mlrinfo')}" ui-sref="mlrinfo.mlrinfo" href="" class="list-group-item">MLR INFO</a>
+        <a ng-class="{'w3-theme-active':$state.is('mlrinfo.issuebrief')}" ui-sref="mlrinfo.issuebrief" href="" class="list-group-item">ISSUE BRIEF</a>
+      </div>
+
+      <div ng-include="'pages/banner.html'">
+      </div>
+
+    </div>
+   <div class="col-md-9">
+      <div ui-view class="content"></div>
+    </div>
+  </div>
+
+</div>
+
+

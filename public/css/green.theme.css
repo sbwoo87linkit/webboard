@@ -1,0 +1,34 @@
+/* * {
+    color: green;
+} */
+
+
+/* .navbar-bg-theme {
+    background-color: green;
+    border-color: green;
+    color: #fff;
+}
+
+.nav>li>a:focus,
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: rgb(12, 184, 12);
+    color: #fff;
+} */
+
+
+ .w3-theme-background {
+     background-color: #086826;
+     border-color: #086826;
+ }
+
+ .w3-theme-text {
+     color: #086826;
+ }
+
+ .w3-theme-active {
+     background-color: rgb(12, 184, 12) !important;
+     border-color: rgb(12, 184, 12) !important;
+     color: #fff !important;
+ }
+

@@ -1,0 +1,53 @@
+<h2  class="w3-theme-text"> {{ $stateParams.title }} <small> - 글쓰기</small></h2>
+
+<summernote ng-model="data.content">
+  <span style="font-weight: bold;"></span>
+</summernote>
+
+<form>
+  <div ng-if="data.articleType === 'korea-sdsn' || data.articleType === 'un-sdsn'" class="form-group">
+    <label>공지게시판 공유</label>
+    <input type="checkbox" ng-model="data.share">
+  </div>
+
+  <div class="form-group">
+    <label for="boardTitle">제목</label>
+    <input ng-model="data.title" type="text" class="form-control" id="boardTitle" placeholder="제목">
+  </div>
+  <div class="form-group">
+    <label for="boardContent">내용</label>
+    <textarea ng-model="data.content" type="text" rows="10" class="form-control" id="boardContent" placeholder="내용"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="boardImage">이미지</label>
+    <input id="boardImage"
+           class="form-control"
+           onchange="angular.element(this).scope().imageChanged(this)"
+           type="file" />
+  </div>
+  <div ng-repeat="image in data.images" style="display: inline-block; width:200px; height: 160px;" class="text-right">
+    <div>
+      <button class="btn btn-xs btn-default" ng-click="deleteImage($index)">삭제</button>
+    </div>
+    <img ng-src="{{apiUrl + image.url}}" alt="" style="width:auto; height:120px; margin-top: 5px;">
+  </div>
+
+  <div class="form-group">
+    <label for="boardAttach">파일</label>
+    <input id="boardAttach"
+           class="form-control"
+           onchange="angular.element(this).scope().fileChanged(this)"
+           type="file" />
+  </div>
+  <div ng-repeat="file in data.files">
+    {{ file.url }} - <button class="btn btn-xs btn-default" ng-click="deleteFile($index)">삭제</button>
+  </div>
+
+
+</form>
+
+<div class="text-right" style="margin-top: 10px;">
+  <button class="btn btn-default" ng-click="goBack()">Back</button>
+  <button class="btn btn-danger" ng-if="isUploading">저장중 .... </button>
+  <button class="btn btn-primary" ng-if="!isUploading" ng-click="save()">저장</button>
+</div>

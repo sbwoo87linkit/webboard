@@ -1,0 +1,129 @@
+<h2  class="w3-theme-text"> {{ $stateParams.title }}
+    <small> - List</small>
+</h2>
+
+<div class="row" style="">
+    <div class="col-lg-6"></div>
+    <div class="col-lg-6 text-right">
+        <button type="button" style="margin-left: 20px;" class="btn btn-success" ng-if="user.role === 'admin'" ui-sref="board.create({'articleType': $stateParams.articleType})">
+            New
+        </button>
+    </div>
+</div>
+
+<!--발간물/행사자료집(gallary) 게시판-->
+<div ng-if="$stateParams.board_type =='gallary'" class="row">
+<!-- <div ng-if="true" class="row"> -->
+    <article class="col-md-6" ng-repeat="item in items" style="margin-top: 10px">
+        <div>
+            <h3>
+
+            </h3>
+            <!--<div class="pull-right">{{item.date | date :  "y.MM.dd"}}</div>-->
+
+            <div style="overflow: hidden">
+                <div style="flot:left">
+                    <a ng-href="{{item.files[0].url}}" target="_blank" style="float:left; margin-right: 20px">
+                        <img ng-src="{{apiUrl + item.images[0].url}}" alt="" style="height:200px; width:149px; margin:10px 0px; border: 1px solid #ccc">
+                    </a>
+                </div>
+                <div>
+                    <div>
+                        <!--<p>{{item.content}}</p>-->
+                        <p style="margin-top: 10px; color: #2f96b4">{{item.title}}__</p>
+                        <p style="margin-top: 80px">
+                            <a href="" class="w3-btn" ng-href="{{apiUrl + item.files[0].url}}" target="_blank">
+                                <!-- <img src="images/btn_detail_view.png" alt=""> -->
+                                View detail <i class="fas fa-search"></i></i>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+                <!--<div>-->
+                <!--<p style="white-space: pre-line; font-size: small; margin-top: 20px" ng-bind="item.content">-->
+                <!--</p>-->
+                <!--</div>-->
+            </div>
+            <div class="text-right" style="overflow: hidden">
+                <button class="btn btn-primary btn-sm" ng-if="user.role === 'admin'" ui-sref="board.edit( {'articleType': item.articleType, 'articleId':item._id})">Edit
+                </button>
+                <button class="btn btn-danger btn-sm" ng-click="data.selectedItem = item; delete(item)" ng-if="user.role === 'admin'" data-toggle="modal"
+                    data-target="#deleteModal">Delete</button>
+            </div>
+
+        </div>
+    </article>
+
+</div>
+
+<!--성명서(public) 게시판-->
+<div ng-if="$stateParams.board_type =='public'" class="row">
+<!-- <div ng-if="true" class="row"> -->
+    <article class="col-md-12" ng-repeat="item in items" style="margin-top: 10px; border-bottom: 1px solid #A2734F">
+        <div>
+            <div style="overflow: hidden">
+                <div>
+                    <div style="color: #2f96b4; margin-bottom: 0px;">
+                        {{item.title}}
+                    </div>
+                    <div ng-if="item.content" style="white-space: pre-line; font-size: small; margin-top: -10px">
+                        {{item.content}}
+                    </div>
+
+                    <ul style="margin-top: 15px">
+                        <li ng-repeat="file in item.files">
+                            <a ng-href="{{file.url}}" target="_blank">{{file.url | filename}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="text-right" style="overflow: hidden; margin-bottom: 10px;">
+                <button class="btn btn-primary btn-sm" ng-if="user.role === 'admin'" ui-sref="board.edit( {'articleType': item.articleType, 'articleId':item._id})">Edit
+                </button>
+                <button class="btn btn-danger btn-sm" ng-click="data.selectedItem = item; delete()" ng-if="user.role === 'admin'" data-toggle="modal"
+                    data-target="#deleteModal">Delete</button>
+            </div>
+
+        </div>
+    </article>
+
+</div>
+
+<!--일반 계시판-->
+<article ng-if="$stateParams.board_type =='board'" class="post bottom-line" ng-repeat="item in items">
+<!-- <article ng-if="true" class="post bottom-line" ng-repeat="item in items"> -->
+    <header>
+        <div class="row">
+            <div class="col-md-2">
+                <img ng-src="{{apiUrl + item.images[0].url}}" class="img-thumbnail" alt="" style="max-width:100%; height: auto; margin:10px 0px;">
+            </div>
+            <div class="col-md-10">
+                <h4>
+                    <a ui-sref="board.view({'articleType': item.articleType, 'articleId':item._id})">{{item.title}}</a>
+                    <!-- <div>{{item}}</div> -->
+                </h4>
+                <span style="font-size: small">
+                    <!-- <i class="far fa-clock-o"></i> -->
+                    <i class="far fa-clock"></i>
+                    <time datetime="{{item.date}}"> {{item.date | date : "y.MM.dd"}}</time>
+                </span>
+                <div ng-bind-html="item.content | linky:'_blank'" class="text" style="white-space: pre-line; font-size: small; margin-top: 5px">
+                </div>
+                <div class="small" style="margin-bottom: 10px">
+                    <a ui-sref="board.view({'articleType': item.articleType, 'articleId':item._id})">[ more ]</a>
+                </div>
+            </div>
+        </div>
+    </header>
+</article>
+
+<paging page="pagination.currentPage" paging-action="load(page)" page-size="pagination.itemsPerPage" total="pagination.totalItems" show-prev-next="true"
+    show-first-last="true">
+</paging>
+
+<div class="alert alert-warning m-t-20" ng-if="!items.length">
+    <strong></strong> No data.
+</div>

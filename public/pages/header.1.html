@@ -1,0 +1,141 @@
+<div class="container header">
+  <div class="roboto">
+    <a href="" ui-sref="home">
+      <span class="fw-100">Mid-Latitude Region Network</span>
+    </a>
+    <div class="w3-right">
+      <a ng-click="changeStyle('green.theme')" href="" class="w3-btn w3-tiny w3-green w3-padding-small">green</a>
+      <a ng-click="changeStyle('blue.theme')" href="" class="w3-btn w3-tiny w3-blue w3-padding-small">blue</a>
+      <a ng-click="changeStyle('lightgray.theme')" href="" class="w3-btn w3-tiny w3-gray w3-padding-small">light-gray</a>
+      <a ng-click="changeStyle('pink.theme')" href="" class="w3-btn w3-tiny w3-pink w3-padding-small">pink</a>
+    </div>    
+  </div>
+</div>
+
+<div id="header">
+  <div class="container w3-bar w3-black">
+    <a ui-sref="Service.dashboard" class="w3-bar-item w3-button w3-yellow">SGS Manager</a>
+    <a href="" class="w3-bar-item w3-hide-small w3-gray">
+      <img class="w3-circle" src="{{AppSettings.apiUrl.restRoot}}{{vm.appContext.user.image_url}}" style="width:18px;height:18px;"
+        alt=""> {{vm.appContext.user.name}}
+    </a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.dashboard" class="w3-bar-item w3-button w3-hide-small">대시보드</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.planner({type_code:'team',type_name:'팀'})" class="w3-bar-item w3-button w3-hide-small">일정관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.health" class="w3-bar-item w3-button w3-hide-small">건강관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.injury" class="w3-bar-item w3-button w3-hide-small">부상관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.event({type_code:'training',type_name:'훈련'})" class="w3-bar-item w3-button w3-hide-small">훈련관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.event({type_code:'game',type_name:'경기'})" class="w3-bar-item w3-button w3-hide-small">경기관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.player({type_code:'team',type_name:'팀'})" class="w3-bar-item w3-button w3-hide-small">선수관리</a>
+    <a ng-if="vm.appContext.role2 !== 'player' && vm.appContext.role2 !== 'fan'" ng-class="{ 'w3-pink': $state.includes('Service.member') }"
+      ui-sref="Service.member({ target: 'CoachingStep', team_id: vm.appContext.info.team_id})" class="w3-bar-item w3-button w3-hide-small">조직관리</a>
+    <a ng-if="vm.appContext.role2 === 'player' || vm.appContext.role2 === 'fan'" ng-class="{ 'w3-pink': $state.includes('Service.member') }"
+      ui-sref="Service.member({ target: 'MyInfo', team_id: vm.appContext.info.team_id})" class="w3-bar-item w3-button w3-hide-small">조직관리</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" ui-sref="Service.system" class="w3-bar-item w3-button w3-hide-small">시스템관리</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" href="" target="_blank" class="w3-bar-item w3-button w3-hide-small">
+      <i class="fa fa-external-link" aria-hidden="true"></i> STORE</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" href="http://admin.sa21c.com" target="_blank" class="w3-bar-item w3-button w3-hide-small">
+      <i class="fa fa-external-link" aria-hidden="true"></i> ADMIN</a>
+    <a ui-sref-active="w3-pink" ui-sref="Accounts.login" class="w3-bar-item w3-button w3-hide-small">로그아웃 </a>
+    <a ui-sref-active="w3-pink" href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+      ng-click="vm.dropMenu = true">&#9776;</a>
+  </div>
+
+  <div ng-click="vm.dropMenu = false" id="demo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium" ng-class="{'w3-show': vm.dropMenu}">
+    <a ui-sref-active="w3-pink" ui-sref="Service.dashboard" class="w3-bar-item w3-button">대시보드</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" ui-sref="Service.planner({type_code:'team',type_name:'팀'})" class="w3-bar-item w3-button">일정관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.health" class="w3-bar-item w3-button">건강관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.injury" class="w3-bar-item w3-button">부상관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.event({type_code:'training',type_name:'훈련'})" class="w3-bar-item w3-button">훈련관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.event({type_code:'game',type_name:'경기'})" class="w3-bar-item w3-button">경기관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.player({type_code:'team',type_name:'팀'})" class="w3-bar-item w3-button">선수관리</a>
+    <a ui-sref-active="w3-pink" ui-sref="Service.member({ target: 'CoachingStep', team_id: vm.appContext.info.team_id})" class="w3-bar-item w3-button">조직관리</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" ui-sref="Service.system" class="w3-bar-item w3-button">시스템관리</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" href="" target="_blank" class="w3-bar-item w3-button">
+      <i class="fa fa-external-link" aria-hidden="true"></i> STORE</a>
+    <a ng-if="$stateParams.v=='sa21c'" ui-sref-active="w3-pink" href="http://admin.sa21c.com" target="_blank" class="w3-bar-item w3-button">
+      <i class="fa fa-external-link" aria-hidden="true"></i> ADMIN</a>
+    <a ui-sref-active="w3-pink" ui-sref="Accounts.login" class="w3-bar-item w3-button">로그아웃
+      <span class="w3-tag"> {{role}}</span>
+    </a>
+  </div>
+
+</div>
+
+
+
+<nav class="navbar navbar-bg-theme navbar-static-top w3-text-white">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li role="presentation" ng-class="{'bg-active-theme': $state.includes('home')}">
+          <a href="" ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse.in">HOME</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $state.includes('home1')}">
+          <a href="" ui-sref="home1" data-toggle="collapse" data-target=".navbar-collapse.in">HOME1</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $state.includes('about')}">
+          <a href="" ui-sref="about.mlrn" data-toggle="collapse" data-target=".navbar-collapse.in">ABOUT</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $state.includes('network')}">
+          <a href="" ui-sref="network.member" data-toggle="collapse" data-target=".navbar-collapse.in">NETWORK</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $state.includes('focus')}">
+          <a href="" ui-sref="focus.wfenexus" data-toggle="collapse" data-target=".navbar-collapse.in">FOCUS</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $state.includes('mlrinfo')}">
+          <a href="" ui-sref="mlrinfo.mlrinfo" data-toggle="collapse" data-target=".navbar-collapse.in">MLR INFO</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $stateParams.main_menu==='resources'}">
+          <a href="" ui-sref="board.list({'main_menu':'resources', 'sub_menu':'reports', title:'REPORTS', 'board_type':'gallary'})" data-toggle="collapse" data-target=".navbar-collapse.in">RESOURCES</a>
+        </li>
+        <li role="presentation" ng-class="{'bg-active-theme': $stateParams.main_menu==='news'}">
+          <a href="" ui-sref="board.list({'main_menu':'news', 'sub_menu':'notice', titiel:'NOTICE', 'board_type' : 'board'})" data-toggle="collapse" data-target=".navbar-collapse.in">NEWS</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-if="!user && users.length">
+          <a href="" ui-sref="login"> Sign-in</a>
+        </li>
+        <li ng-if="user || !users.length">
+          <a href="" ui-sref="signup"> Sign-up</a>
+        </li>
+        <li ng-if="user">
+          <a href="" ng-controller="login.ctrl" ng-click="logout()">
+            <span class="label label-primary" href ng-if="user">{{user.role}}</span> Sign-out</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+
+<nav class="navbar navbar-bg-theme w3-text-white">
+  <div class="container">
+
+    
+<div class="w3-bar" style="margin-top:5px;">
+  <a href="#" class="w3-bar-item">Home</a>
+  <a href="#" class="w3-bar-item">Link 1</a>
+  <a href="#" class="w3-bar-item">Link 2</a>
+  <div class="w3-right">
+    <a href="#" class="w3-bar-item">Link 3</a>
+    <a href="#" class="w3-bar-item">Link 3</a>
+  </div>
+</div>
+
+
+  </div>
+</nav>

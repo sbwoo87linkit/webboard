@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="side-title">
+        <h5>ABOUT</h5>
+      </div>
+
+      <div class="list-group">
+        <a ng-class="{'w3-theme-active':$state.is('about.mlrn')}" ui-sref="about.mlrn" href="" class="list-group-item">MLRN ?</a>
+        <a ng-class="{'w3-theme-active':$state.is('about.visionandgoal')}" ui-sref="about.visionandgoal" href="" class="list-group-item">VISION AND GOAL</a>
+        <a ng-class="{'w3-theme-active':$state.is('about.contact')}" ui-sref="about.contact" href="" class="list-group-item">CONTACT</a>
+      </div>
+
+      <div ng-include="'pages/banner.html'">
+      </div>
+
+    </div>
+    <div class="col-md-9">
+      <div ui-view class="content"></div>
+    </div>
+  </div>
+
+</div>

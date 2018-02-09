@@ -1,0 +1,63 @@
+<h2  class="w3-theme-text"> {{ $stateParams.title }} <small> - Edit</small></h2>
+
+
+<form>
+  <div class="form-group">
+    <label for="noticeTitle">Share with public board</label>
+    <input type="checkbox" ng-model="data.share">
+  </div>
+  <div class="form-group">
+    <label for="noticeTitle">Title</label>
+    <input ng-model="data.title" type="text" class="form-control" id="noticeTitle" placeholder="제목">
+  </div>
+  <div class="form-group">
+    <label for="noticeContent">Content</label>
+    <textarea ng-model="data.content" type="text" rows="10" class="form-control" id="noticeContent" placeholder="내용"></textarea>
+  </div>
+  <!--<div class="form-group">-->
+    <!--<label for="noticeImage">파일</label>-->
+    <!--<input id="noticeImage"-->
+           <!--class="form-control"-->
+           <!--onchange="angular.element(this).scope().file_changed(this)"-->
+           <!--type="file" />-->
+  <!--</div>-->
+  <!--<div ng-repeat="file in data.files" style="display: inline-block; width:200px; height: 160px;" class="text-right">-->
+    <!--<button class="btn btn-xs btn-default" ng-click="deleteFile($index)">삭제</button>-->
+    <!--<img ng-src="{{file.url}}" alt="" style="width:180px; height:120px; margin-top: 5px;">-->
+  <!--</div>-->
+
+  <div class="form-group">
+    <label for="boardImage">Images</label>
+    <input id="boardImage"
+           class="form-control"
+           onchange="angular.element(this).scope().imageChanged(this)"
+           type="file" />
+  </div>
+  <div ng-repeat="image in data.images" style="display: inline-block; width:200px; height: 160px;" class="text-right">
+    <div>
+      <button class="btn btn-xs btn-default" ng-click="deleteImage($index)">Delete</button>
+    </div>
+    <img ng-src="{{apiUrl + image.url}}" alt="" style="width:auto; height:120px; margin-top: 5px;">
+  </div>
+
+  <div class="form-group">
+    <label for="boardAttach">Files</label>
+    <input id="boardAttach"
+           class="form-control"
+           onchange="angular.element(this).scope().fileChanged(this)"
+           type="file" />
+  </div>
+  <div ng-repeat="file in data.files">
+    {{ file.url }} - <button class="btn btn-xs btn-default" ng-click="deleteFile($index)">Delete</button>
+  </div>
+
+
+
+</form>
+
+
+<div class="text-right">
+  <button class="btn btn-default" ng-click="goBack()">Cancel</button>
+  <button class="btn btn-danger" ng-if="isUploading">Saving .... </button>
+  <button class="btn btn-primary" ng-if="!isUploading" ng-click="save()">Save</button>
+</div>

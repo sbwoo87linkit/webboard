@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="side-title">
+                <h5>RESOURCES</h5>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" ng-class="{ 'active' : $stateParams.articleType === 'issue' }">
+                    <a ui-sref="board.list({'articleType':'issue'})">연구 발간물</a>
+                </li>
+                <li role="presentation" ng-class="{ 'active' : $stateParams.articleType === 'event-docs' }">
+                    <a ui-sref="board.list({'articleType':'event-docs'})">행사 자료집</a>
+                </li>
+                <li role="presentation" ng-class="{ 'active' : $stateParams.articleType === 'public' }">
+                    <a ui-sref="board.list({'articleType':'public'})">성명서</a>
+                </li>
+            </ul>
+
+            <div ng-include="'pages/banner.html'">
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div ui-view class="content"></div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="side-title">
+        <h5>ABOUT</h5>
+      </div>
+
+
+
+
+      <div class="w3-bar-block w3-light-grey">
+        <a ui-sref="about.mlrn" class="w3-bar-item" ng-class="{'w3-theme-active':$state.is('about.mlrn')}">MLRN?</a>
+        <a ui-sref="about.visionandgoal" class="w3-bar-item" ng-class="{'w3-theme-active':$state.is('about.visionandgoal')}">VISION & GOAL</a>
+        <a ui-sref="about.contact"  class="w3-bar-item" ng-class="{'w3-theme-active':$state.is('about.contact')}">CONTACT</a>
+      </div>
+
+
+      <!-- <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" ng-class="{'w3-theme-active':$state.is('about.mlrn')}">
+          <a ui-sref="about.mlrn">MLRN?</a>
+        </li>
+        <li role="presentation" ng-class="{'w3-theme-active':$state.is('about.visionandgoal')}">
+          <a ui-sref="about.visionandgoal">VISION AND GOAL</a>
+        </li>
+        <li role="presentation" ng-class="{'w3-theme-active':$state.is('about.contact')}">
+          <a ui-sref="about.contact">CONTACT</a>
+        </li>
+      </ul> -->
+
+
+
+
+
+
+
+
+      <div ng-include="'pages/banner.html'">
+      </div>
+
+    </div>
+    <div class="col-md-9">
+      <div ui-view class="content"></div>
+    </div>
+  </div>
+
+</div>

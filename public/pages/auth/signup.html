@@ -1,0 +1,41 @@
+<div class="container" style="min-height: 500px;">
+
+    <div class="col-md-offset-4 col-md-4" style="background: #e0e0e0; margin-top: 50px; border: 2px solid #9d9d9d">
+
+        <div style="padding: 20px;">
+            <h3 class="text-center">Sign-up</h3>
+            <form>
+                <div class="form-group">
+                    <label for="email">Role</label>
+                    <select name="singleSelect" class="form-control" ng-model="data.role" ng-change="data.roleChange(data);">
+                        <option value="admin">admin</option>
+                        <option value="manager">manager</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input ng-model="data.email" type="text" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input ng-model="data.password" type="text" class="form-control" id="password" placeholder="Password">
+                </div>
+            </form>
+
+
+            <div class="text-right">
+                <!--<button class="btn btn-default" ng-click="goBack()">취소</button>-->
+                <button class="btn btn-primary btn-block" ng-click="signup(data)">Sign-up</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<div style="padding: 20px;">
+    <hr>
+</div>

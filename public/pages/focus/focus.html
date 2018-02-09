@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="side-title">
+        <h5>FOCUS</h5>
+      </div>
+
+      <div class="list-group">
+        <a ng-class="{'w3-theme-active':$state.is('focus.wfenexus')}" ui-sref="focus.wfenexus" href="" class="list-group-item">WFE NEXUS</a>
+        <a ng-class="{'w3-theme-active':$state.is('focus.thematicgroup')}" ui-sref="focus.thematicgroup" href="" class="list-group-item">THEMATIC GROUP</a>
+      </div>
+
+      <div ng-include="'pages/banner.html'">
+      </div>
+
+    </div>
+    <div class="col-md-9">
+      <div ui-view class="content"></div>
+    </div>
+  </div>
+
+</div>

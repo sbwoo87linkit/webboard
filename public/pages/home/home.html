@@ -1,0 +1,212 @@
+<div class="container">
+    <h2>Tabs in a Grid</h2>
+
+    <div class="w3-row">
+        <a href="javascript:void(0)" onclick="openCity(event, 'London');">
+            <div class="w3-third tablink w3-green w3-bottombar w3-hover-light-grey w3-padding w3-center">London</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openCity(event, 'Paris');">
+            <div class="w3-third tablink w3-blue w3-bottombar w3-hover-light-grey w3-padding w3-right-align">Paris</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openCity(event, 'Tokyo');">
+            <div class="w3-third tablink w3-pink w3-bottombar  w3-hover-light-grey w3-padding">Tokyo</div>
+        </a>
+    </div>
+
+    <div id="London" class="w3-container city" style="display:none">
+        <h2>London</h2>
+        <p>London is the capital city of England.</p>
+    </div>
+
+    <div id="Paris" class="w3-container city" style="display:none">
+        <h2>Paris</h2>
+        <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="Tokyo" class="w3-container city" style="display:none">
+        <h2>Tokyo</h2>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.firstElementChild.className += " w3-border-red";
+    }
+</script>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row w3-theme-text" style="border-bottom: 2px solid #A2734F; margin:20px 0">
+                <div class="col-md-8" style="font-size: 30px">MLRN ACTIVITIES</div>
+                <div class="col-md-4 text-right" style="margin-top: 20px;">
+                    <a ui-sref="board.list({'main_menu':'news', 'sub_menu':'mlrnactivites', title:'MLRN ACTIVITIE', 'board_type' : 'board'})"> more <i class="far fa-plus-square"></i></a>
+                    
+                </div>
+            </div>
+
+
+            <div  style="height: 300px; overflow:hidden" id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+                <ol class="carousel-indicators">
+                    <!-- <li ng-repeat="slide in slides track by slide.id" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active:!$index}"></li> -->
+                    <li ng-repeat="slide in slides track by $index" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active:!$index}"></li>
+                </ol>
+            
+                <div class="carousel-inner">
+                    <div class="item" ng-repeat="slide in slides track by $index" ng-class="{active:!$index}">
+                        <a ui-sref="board.view({'articleType':'korea-sdsn', 'articleId': slide._id})">
+                            <img ng-src="{{apiUrl + slide.images[0].url}}" alt="slide" style="width:100%;">
+                        </a>
+                    </div>
+                </div>
+            
+                <a class="left carousel-control" data-target="#myCarousel" data-slide="prev" style="cursor:pointer">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" data-target="#myCarousel" data-slide="next" style="cursor:pointer">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <!--공지사항-->
+            <div class="row w3-theme-text" style="border-bottom: 2px solid #A2734F; margin:20px 0">
+                <div class="col-md-8" style="font-size: 30px">NOTICE</div>
+                <div class="col-md-4 text-right" style="margin-top: 20px;">
+                    <a ui-sref="board.list({'main_menu':'news', 'sub_menu':'notice', title:'NOTICE', 'board_type' : 'board'})"> more <i class="far fa-plus-square"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-repeat="item in notices" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-bottom: 7px">
+                        <a ui-sref="board.view({'articleType':'notice', 'articleId': item._id})" bs-tooltip data-toggle="tooltip" data-placement="top"
+                            title="{{item.title}}">{{item.title}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning m-t-20" ng-if="!notices.length">
+                <strong></strong> No data.
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        
+        <div class="col-md-6">
+            <div class="row w3-theme-text" style="border-bottom: 2px solid #A2734F; margin:20px 0">
+                <div class="col-md-8" style="font-size: 30px">REPORTS</div>
+                <div class="col-md-4 text-right" style="margin-top: 20px;">
+                    <a ui-sref="board.list({'main_menu':'news', 'sub_menu':'reports', title:'REPORTS', 'board_type' : 'gallary'})"> more <i class="far fa-plus-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-repeat="item in reports" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-bottom: 7px">
+                        <a ui-sref="board.view({'articleType':'notice', 'articleId': item._id})" bs-tooltip data-toggle="tooltip" data-placement="top"
+                            title="{{item.title}}">{{item.title}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-warning m-t-20" ng-if="!reports.length">
+                <strong></strong> No data.
+            </div>
+        </div> 
+   
+
+        <div class="col-md-6">
+            <div class="row w3-theme-text" style="border-bottom: 2px solid #A2734F; margin:20px 0">
+                <div class="col-md-8" style="font-size: 30px">MATERIALS</div>
+                <div class="col-md-4 text-right" style="margin-top: 20px;">
+                    <a ui-sref="board.list({'main_menu':'news', 'sub_menu':'materials', title:'MATERIALS', 'board_type' : 'gallary'})"> more <i class="far fa-plus-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-repeat="item in materials" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-bottom: 7px">
+                        <a ui-sref="board.view({'articleType':'notice', 'articleId': item._id})" bs-tooltip data-toggle="tooltip" data-placement="top"
+                            title="{{item.title}}">{{item.title}}</a>
+                    </div>
+                </div>
+            </div>
+                <div class="alert alert-warning m-t-20" ng-if="!materials.length">
+                    <strong></strong> No data.
+                </div>
+        </div>
+    </div>
+
+</div>
+
+<!--유관기관 링크 Static-->
+<div class="container">
+    <div class='row' style="margin-top: 30px; margin-bottom: 20px">
+        <div class='col-md-12'>
+            <div class="link-wrapper">
+                <a class="site-link" href="http://www.unsdsn.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="UN SDSN">
+                    <img class="logo" src="images/logos/sdsn_logo_fc.png" alt="">
+                </a>
+                <a class="site-link" href="https://sustainabledevelopment.un.org/" target="_blank" data-toggle="tooltip" data-placement="top"
+                    title="UN Sustainable Development Knowledge Platform">
+                    <img class="logo" src="images/logos/UN_DKP.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.sd-network.eu/" target="_blank" data-toggle="tooltip" data-placement="top" title="ESDN">
+                    <img class="logo" src="images/logos/ESDN.gif" alt="">
+                </a>
+                <a class="site-link" href="https://www.un.org/development/desa/en/" target="_blank" data-toggle="tooltip" data-placement="top"
+                    title="UN DESA">
+                    <img class="logo" src="images/logos/UNDESA.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.unescap.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="UNESCAP">
+                    <img class="logo" src="images/logos/ESCAP.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.oecd.org/greengrowth/ggsd-forum.htm" target="_blank" data-toggle="tooltip" data-placement="top"
+                    title="GGSD Forum">
+                    <img class="logo" src="images/logos/GGSD_OECD.png" alt="">
+                </a>
+                <a class="site-link" href="http://web.unep.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="UNEP">
+                    <img class="logo" src="images/logos/UNEP.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.greengrowthknowledge.org/" target="_blank" data-toggle="tooltip" data-placement="top"
+                    title="Green Growth Knowledge Platform">
+                    <img class="logo" src="images/logos/green_growth_knowledge_platform.png" alt="">
+                </a>
+                <a class="site-link" href="http://gggi.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="GGGI">
+                    <img class="logo" src="images/logos/GGGI.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.unssc.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="UNSSC">
+                    <img class="logo" src="images/logos/unssc-logo.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.iddri.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="IDDRI">
+                    <img class="logo" src="images/logos/IDDRI.jpg" alt="">
+                </a>
+                <a class="site-link" href="http://deepdecarbonization.org/" target="_blank" data-toggle="tooltip" data-placement="top" title="DDPP">
+                    <img class="logo" src="images/logos/DDPP.png" alt="">
+                </a>
+                <a class="site-link" href="http://www.die-gdi.de/en/" target="_blank" data-toggle="tooltip" data-placement="top" title="DIE">
+                    <img class="logo" src="images/logos/DIE.jpg" alt="">
+                </a>
+                <a class="site-link" href="http://kei.re.kr/aKor/main.kei" target="_blank" data-toggle="tooltip" data-placement="top" title="KEI">
+                    <img class="logo" src="images/logos/KEI.jpg" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
