@@ -32,7 +32,7 @@ app.controller('signup.ctrl', function($scope, $rootScope, $state, $stateParams,
 
          $http.post(config.apiUrl + '/user/signup', user).then(function (res) {
 
-            $state.go('login')
+            $state.go('signin')
 
         }, function (err) {
             console.log(err)

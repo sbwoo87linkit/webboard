@@ -1,16 +1,23 @@
 
-app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService, toastr, $log,  config, $ngConfirm) {
+app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService, appContextService, toastr, $log,  config, $ngConfirm) {
 
-    console.log('aaaa');
+    var vm = this;
+    vm.appContext = appContextService.context;
+    // console.log('board.list.ctrl ... $stateParams.menu', $stateParams.menu)
 
-    $scope.apiUrl = config.apiUrl;
-    // $scope.boardType = menuService.get($stateParams).boardType;
+
+    vm.apiUrl = config.apiUrl;
+    // vm.boardType = menuService.get($stateParams).boardType;
     // $rootScope.menu = menuService.get($stateParams).menu;
-    // $scope.viewTitle = menuService.get($stateParams).boardTitle;
+    // vm.viewTitle = menuService.get($stateParams).boardTitle;
 
-    $scope.data = { "searchText": "" };
 
-    $scope.pagination = {
+    return;
+
+
+    vm.data = { "searchText": "" };
+
+    vm.pagination = {
         maxSize: 5,
         totalItems: 0,
         currentPage: 1,
@@ -18,17 +25,17 @@ app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateP
 
     };
 
-    $scope.load = function (page) {
+    vm.load = function (page) {
 
         console.log('page', page);
-        // $scope.currentPage = page;
-        boardService.load($stateParams.sub_menu, page, $scope.pagination.itemsPerPage, $scope.data.searchText).then(
+        // vm.currentPage = page;
+        boardService.load($stateParams.sub_menu, page, vm.pagination.itemsPerPage, vm.data.searchText).then(
             function (res) {
                 // console.log('res', res);
-                $scope.items = res.data.list;
-                // $scope.items = res.data;
+                vm.items = res.data.list;
+                // vm.items = res.data;
                 // console.log('res....', res)
-                $scope.pagination.totalItems = res.data.count;
+                vm.pagination.totalItems = res.data.count;
             },
             function (err) {
                 console.log(err);
@@ -37,39 +44,39 @@ app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateP
     }
 
     // initial load & reset
-    $scope.load($scope.currentPage);
+    vm.load(vm.currentPage);
 
-    $scope.pageChanged = function () {
-        console.log('Page changed to: ' + $scope.pagination.currentPage);
-        // $scope.load($scope.pagination.currentPage);
+    vm.pageChanged = function () {
+        console.log('Page changed to: ' + vm.pagination.currentPage);
+        // vm.load(vm.pagination.currentPage);
     };
 
-    $scope.search = function () {
-        $scope.pagination.currentPage = 1;
-        $scope.load($scope.pagination.currentPage);
+    vm.search = function () {
+        vm.pagination.currentPage = 1;
+        vm.load(vm.pagination.currentPage);
     }
 
-    $scope.reset = function () {
-        $scope.pagination.currentPage = 1;
-        $scope.data.searchText = "";
-        $scope.load($scope.pagination.currentPage);
+    vm.reset = function () {
+        vm.pagination.currentPage = 1;
+        vm.data.searchText = "";
+        vm.load(vm.pagination.currentPage);
     }
 
-    // $scope.delete = function () {
+    // vm.delete = function () {
     //     // alert('delete')
-    //     // console.log($scope.data.selectedItem)
+    //     // console.log(vm.data.selectedItem)
 
-    //     boardService.delete($scope.data.selectedItem._id).then(
+    //     boardService.delete(vm.data.selectedItem._id).then(
     //         function (result) {
     //             // window.history.back();
-    //             $scope.load($scope.currentPage);
+    //             vm.load(vm.currentPage);
     //         }, function (err) {
     //             alert(err);
     //         }
     //     )
     // }
 
-    $scope.delete = function (item) {
+    vm.delete = function (item) {
 
                         console.log(item)
 
@@ -78,7 +85,7 @@ app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateP
             useBootstrap: false,
             title: '삭제확인',
             content: '삭제하시겠습니까?',
-            scope: $scope,
+            scope: vm,
             buttons: {
                 confirm: {
                     text: '삭제',

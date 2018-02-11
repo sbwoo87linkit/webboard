@@ -1,17 +1,23 @@
-app.controller('main.ctrl', function ($scope, userService, toastr) {
+app.controller('main.ctrl', function ($scope, userService, appContextService, toastr, config) {
+
+    var vm = this;
+    vm.appContext = appContextService.context;
+    vm.appContext.appTitle = config.appTitle;
+
+    // console.log('config', config)
+    vm.appContext.menuArray = config.menuArray;
 
     userService.list().then(function(res){
-        // console.log(res);
-        $scope.users = res.data;
+        vm.appContext.users = res.data;
         if (!res.data.length) {
             toastr.info('ctrl. No admin users are registered.')
         }
     });
 
-    $scope.styleName = 'green.theme.css';
+    vm.appContext.styleName = 'green.theme.css';
 
-    $scope.changeStyle = function (styleName) {
-        $scope.styleName = styleName + '.css';
+    vm.changeStyle = function (styleName) {
+        vm.appContext.styleName = styleName + '.css';
     };
 
 })

@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="app"  ng-controller="main.ctrl">
+<html ng-app="app" ng-controller="main.ctrl as vm">
 
 <head>
 
@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>MLRN home page</title>
+  <title>web board</title>
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="node_modules/angular-confirm1/dist/angular-confirm.min.css" />
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.min.css" />
   <link rel="stylesheet" href="node_modules/summernote/dist/summernote.css" />
   <link rel="stylesheet" href="node_modules/w3-css/3/w3.css" />
-  <link rel="stylesheet" ng-href="css/{{styleName}}" />
+  <link rel="stylesheet" ng-href="css/{{vm.appContext.styleName}}" />
   <link rel="stylesheet" href="css/style.css" />
 
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -39,6 +39,10 @@
   <script src="node_modules/angular-disqus/angular-disqus.min.js"></script>
 
   <script src="app.js"></script>
+
+  <script src="constant.js"></script>
+
+  <script src="services/appContext.service.js"></script>
   <script src="services/user.service.js"></script>
   <script src="services/board.service.js"></script>
   <!-- <script src="services/menu.service.js"></script> -->
@@ -46,22 +50,32 @@
   <script src="pages/home/home.js"></script>
   <!-- <script src="pages/join/new.js"></script>
   <script src="pages/join/list.js"></script> -->
-  <script src="pages/auth/login.js"></script>
+  <script src="pages/auth/signin.js"></script>
   <script src="pages/auth/signup.js"></script>
   <script src="pages/board/board.js"></script>
   <script src="pages/board/create.js"></script>
   <script src="pages/board/edit.js"></script>
   <script src="pages/board/list.js"></script>
+  <script src="pages/board/page.js"></script>
   <script src="pages/board/view.js"></script>
-
 </head>
 
-
 <body>
-  <!-- <div ui-view /> -->
   <div ng-include="'pages/header.html'"></div>
-  <div ui-view></div>
+  <div class="container">
+    <div class="row">
+      <div ng-if="!$state.is('home') && !$state.is('signin') && !$state.is('signup')" class="col-md-3" ng-include="'pages/sidebar.html'"></div>
+      <div class="" ng-class="($state.is('home') || $state.is('signin') || $state.is('signup')) ? 'col-md-12' : 'col-md-9'">
+        <div class="w3-pink">
+          {{$state.current.name}} $state.is('home') : {{$state.is('home')}}
+        </div>
+        <div ui-view class="content"></div>
+      </div>
+    </div>
+
+  </div>
+
   <div ng-include="'pages/footer.html'"></div>
-  </body>
+</body>
 
 </html>

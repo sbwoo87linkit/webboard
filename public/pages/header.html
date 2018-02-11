@@ -1,22 +1,58 @@
+<!-- <div>
+  {{vm}}
+</div> -->
 <div class="container header">
   <div class="roboto">
     <a href="" ui-sref="home">
-      <span class="fw-100">Mid-Latitude Region Network</span>
+      <!-- <span class="fw-100">Mid-Latitude Region Network</span> -->
+      <span class="fw-100">{{vm.appContext.appTitle}}</span>
     </a>
     <div class="w3-right">
-      <a ng-click="changeStyle('green.theme')" href="" class="w3-btn w3-tiny w3-green w3-padding-small">green</a>
-      <a ng-click="changeStyle('blue.theme')" href="" class="w3-btn w3-tiny w3-blue w3-padding-small">blue</a>
+      <a ng-click="vm.changeStyle('green.theme')" href="" class="w3-btn w3-tiny w3-green w3-padding-small">green</a>
+      <a ng-click="vm.changeStyle('blue.theme')" href="" class="w3-btn w3-tiny w3-blue w3-padding-small">blue</a>
     </div>
   </div>
 </div>
 
+<!-- <div>{{vm.appContext}}</div>  -->
+
 <nav class="navbar w3-theme-background w3-text-white">
   <div class="container">
 
+    <!-- {{vm.appContext}} -->
+<!-- {{vm.appContext.menuArray[0]}} -->
 
     <div class="w3-bar" style="margin-top:5px;">
+
       <a href="" ui-sref="home" class="w3-bar-item">HOME</a>
-      <!-- <a href="" ui-sref="home1" class="w3-bar-item">HOME1</a> -->
+
+      <a href="" ui-sref="{{ menu.list[menu.activeIndex].mode==='board' ? 'board.list({main_menu: menu.name,sub_menu:menu.list[menu.activeIndex].name})' : 'board.page({main_menu: menu.name,sub_menu:menu.list[menu.activeIndex].name})' }}" class="w3-bar-item" ng-repeat="menu in vm.appContext.menuArray"> {{menu.name | uppercase}} </a>
+
+      <!-- <a href="" ui-sref="board.page({main_menu: menu.name,sub_menu:menu.list[menu.activeIndex].name})" class="w3-bar-item" ng-repeat="menu in vm.appContext.menuArray"> {{menu.name | uppercase}} </a>
+      <a href="" ui-sref="board.list({main_menu: menu.name,sub_menu:menu.list[menu.activeIndex].name})" class="w3-bar-item" ng-repeat="menu in vm.appContext.menuArray"> {{menu.name | uppercase}} </a> -->
+
+
+      <!-- <a href="" ui-sref="board.list({'main_menu':'about', 'sub_menu':'mlrn', title:'REPORTS', 'board_type':'gallary'})" class="w3-bar-item">ABOUT</a>
+      <a href="" ui-sref="board.list({'main_menu':'network', 'sub_menu':'member', title:'REPORTS', 'board_type':'gallary'})" class="w3-bar-item">NETWORK</a>
+      <a href="" ui-sref="board.list({'main_menu':'focus', 'sub_menu':'wfenexus', title:'REPORTS', 'board_type':'gallary'})" class="w3-bar-item">FOCUS</a>
+      <a href="" ui-sref="board.list({'main_menu':'mlrinfo', 'sub_menu':'mlrinfo', title:'REPORTS', 'board_type':'gallary'})" class="w3-bar-item">MLR INFO</a>
+
+
+      <a href="" ui-sref="board.list({'main_menu':'resources', 'sub_menu':'reports', title:'REPORTS', 'board_type':'gallary'})"
+        class="w3-bar-item">RESOURCES</a>
+      <a href="" ui-sref="board.list({'main_menu':'news', 'sub_menu':'notice', title:'NOTICE', 'board_type' : 'board'})" class="w3-bar-item">NEWS</a> -->
+
+      <!-- <a href="" ui-sref="list" class="w3-bar-item" ng-repeat="(key, value) in vm.appContext.menuObject">{{key | uppercase}} {{Object.keys(value)}}</a> -->
+
+<!-- 
+      <a href="" ui-sref="app({menu: 'mlrn'})" class="w3-bar-item">MLRN</a>
+      <a href="" ui-sref="app({menu: 'vision'})" class="w3-bar-item">{{'vision' | uppercase}}</a>
+      <a href="" ui-sref="app({menu: 'home'})" class="w3-bar-item">{{'home' | uppercase}}</a>
+ -->
+
+
+      <!--       
+      <a href="" ui-sref="home" class="w3-bar-item">HOME</a>
       <a href="" ui-sref="about.mlrn" class="w3-bar-item">ABOUT</a>
       <a href="" ui-sref="network.member" class="w3-bar-item">NETWORK</a>
       <a href="" ui-sref="focus.wfenexus" class="w3-bar-item">FOCUS</a>
@@ -24,11 +60,12 @@
       <a href="" ui-sref="board.list({'main_menu':'resources', 'sub_menu':'reports', title:'REPORTS', 'board_type':'gallary'})"
         class="w3-bar-item">RESOURCES</a>
       <a href="" ui-sref="board.list({'main_menu':'news', 'sub_menu':'notice', title:'NOTICE', 'board_type' : 'board'})" class="w3-bar-item">NEWS</a>
+ -->
       <div class="w3-right">
-        <a href="" ng-if="!user && users.length" ui-sref="login" class="w3-bar-item"> Sign-in</a>
-        <a href="" ng-if="user || !users.length" ui-sref="signup" class="w3-bar-item"> Sign-up</a>
-        <a href="" ng-if="user" ng-controller="login.ctrl" ng-click="logout()" class="w3-bar-item">
-          <span class="w3-theme-active" style="padding:3px 10px;" href ng-if="user">{{user.role}}</span> Sign-out</a>
+        <a href="" ng-if="!vm.appContext.user && vm.appContext.users.length" ui-sref="signin" class="w3-bar-item"> Sign-in</a>
+        <a href="" ng-if="vm.appContext.user || !vm.appContext.users.length" ui-sref="signup" class="w3-bar-item"> Sign-up</a>
+        <a href="" ng-if="vm.appContext.user" ng-controller="signin.ctrl as vm" ng-click="vm.logout()" class="w3-bar-item">
+          <span class="w3-theme-active" style="padding:3px 10px;" href ng-if="vm.appContext.user">{{vm.appContext.user.role}}</span> Sign-out</a>
       </div>
     </div>
 

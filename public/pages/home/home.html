@@ -1,3 +1,5 @@
+
+<!-- 
 <div class="container">
     <h2>Tabs in a Grid</h2>
 
@@ -44,7 +46,7 @@
         evt.currentTarget.firstElementChild.className += " w3-border-red";
     }
 </script>
-
+ -->
 
 
 <div class="container">
@@ -59,7 +61,7 @@
             </div>
 
 
-            <div  style="height: 300px; overflow:hidden" id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <div ng-if="slides.length"  style="height: 300px; overflow:hidden" id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
                 <ol class="carousel-indicators">
                     <!-- <li ng-repeat="slide in slides track by slide.id" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active:!$index}"></li> -->
                     <li ng-repeat="slide in slides track by $index" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active:!$index}"></li>

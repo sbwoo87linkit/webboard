@@ -45,19 +45,28 @@ app.config(function ($httpProvider, toastrConfig) {
 
 app.config(function ($stateProvider, $urlRouterProvider, $authProvider, $locationProvider, $disqusProvider, config) {
 
-	// console.log('appContextService', appContextService);
 	$disqusProvider.setShortname('sdsnkoreaorg'); // Configure the disqus shortname
 	$locationProvider.hashPrefix('!'); // Disqus needs hashbang in urls. If you are using pushstate then no need for this.
 
 	$urlRouterProvider.otherwise('/home');
-	// $urlRouterProvider.otherwise('/list?menu=home');
 
 	$stateProvider
 
-		.state('signin', {
-			url: '/signin',
-			templateUrl: 'pages/auth/signin.html',
-			controller: 'signin.ctrl as vm'
+		.state('home', {
+			url: '/home',
+			templateUrl: 'pages/home/home.html',
+			controller: 'home.ctrl as vm'
+		})
+		// .state('home1', {
+		// 	url: '/home1',
+		// 	templateUrl: 'pages/home/home1.html',
+		// 	controller: 'home.ctrl as vm'
+		// })
+
+		.state('login', {
+			url: '/login',
+			templateUrl: 'pages/auth/login.html',
+			controller: 'login.ctrl as vm'
 		})
 
 		.state('signup', {
@@ -66,30 +75,138 @@ app.config(function ($stateProvider, $urlRouterProvider, $authProvider, $locatio
 			controller: 'signup.ctrl as vm'
 		})
 
-		.state('home', {
-			url: '/home',
-			templateUrl: 'pages/home/home.html',
-			controller: 'home.ctrl as vm'
+		// ABOUT
+		// MLRN ? VISION & GOAL    CONTACT
+
+		.state('about', {
+			abstract: true,
+			url: '/about',
+			templateUrl: 'pages/about/about.html'
 		})
+
+		.state('about.mlrn', {
+			url: '/mlrn',
+			templateUrl: 'pages/about/about.mlrn.html'
+		})
+		.state('about.visionandgoal', {
+			url: '/visionandgoal',
+			templateUrl: 'pages/about/about.visionandgoal.html'
+		})
+		.state('about.contact', {
+			url: '/contact',
+			templateUrl: 'pages/about/about.contact.html'
+		})
+
+
+
+		// NETWORK
+		// MEMBER   PARTNER  By PROGRAM   JOIN US
+		.state('network', {
+			url: '/network',
+			templateUrl: 'pages/network/network.html'
+		})
+		.state('network.member', {
+			url: '/member',
+			templateUrl: 'pages/network/network.member.html',
+		})
+		.state('network.partner', {
+			url: '/partner',
+			templateUrl: 'pages/network/network.partner.html',
+		})
+		.state('network.program', {
+			url: '/program',
+			templateUrl: 'pages/network/network.program.html',
+		})
+		.state('network.joinus', {
+			url: '/joinus',
+			templateUrl: 'pages/network/network.joinus.html',
+		})
+
+
+		// FOCUS
+		// WFE NEXUS    THEMATIC GROUP
+		.state('focus', {
+			url: '/focus',
+			templateUrl: 'pages/focus/focus.html'
+		})
+		.state('focus.wfenexus', {
+			url: '/wfenexus',
+			templateUrl: 'pages/focus/focus.wfenexus.html',
+		})
+		.state('focus.thematicgroup', {
+			url: '/thematicgroup',
+			templateUrl: 'pages/focus/focus.thematicgroup.html',
+		})
+
+		// MLR INFO
+		// MLR INFO    ISSUE BRIEF
+		.state('mlrinfo', {
+			url: '/mlrinfo',
+			templateUrl: 'pages/mlrinfo/mlrinfo.html'
+		})
+		.state('mlrinfo.mlrinfo', {
+			url: '/mlrinfo',
+			templateUrl: 'pages/mlrinfo/mlrinfo.mlrinfo.html',
+		})
+		.state('mlrinfo.issuebrief', {
+			url: '/issuebrief',
+			templateUrl: 'pages/mlrinfo/mlrinfo.issuebrief.html',
+		})
+
+		// .state('content', {
+		// 	abstract: true,
+		// 	url: '/content?main_menu&sub_menu&title&content_type',
+		// 	templateUrl: 'pages/content/content.html',
+		// 	// controller: 'content.ctrl as vm'
+		// })
+		// .state('content.create', {
+		// 	url: '/create',
+		// 	templateUrl: 'pages/content/create.html',
+		// 	controller: 'content.create.ctrl as vm'
+		// })
+		// .state('content.view', {
+		// 	url: '/view/:articleId',
+		// 	templateUrl: 'pages/content/view.html',
+		// 	controller: 'content.view.ctrl as vm'
+		// })
+		// .state('content.edit', {
+		// 	url: '/edit/:articleId',
+		// 	templateUrl: 'pages/content/edit.html',
+		// 	controller: 'content.edit.ctrl as vm'
+		// })
 
 
 
 		.state('board', {
 			abstract: true,
-			url: '/board?main_menu&sub_menu',
-			// templateUrl: 'pages/board/board.html',
+			url: '/board?main_menu&sub_menu&title&board_type',
+			templateUrl: 'pages/board/board.html',
 			// controller: 'board.ctrl as vm'
 		})
 		.state('board.list', {
 			url: '/list',
-			templateUrl: 'pages/board/list.html',
+			// templateUrl: 'pages/board/list.html',
+			templateUrl: function (stateParams) {
+				console.log('config.menu .....', config.menu)
+				console.log('stateParams .....', stateParams)
+				console.log('11', config.menu[stateParams.sub_menu])
+				// return 'templates/connection/' + stateParams.provider + '.html';
+				// if (stateParams.sub_menu === 'mlrn') {
+				// 	return 'pages/about/about.mlrn.html';
+				// } else {
+				// 	return 'pages/board/list.html';
+				// }
+
+				if (config.menu[stateParams.sub_menu].board_type === 'static') {
+					return config.menu[stateParams.sub_menu].template_url;
+				} else {
+					return 'pages/board/list.html';
+				}
+
+
+			},
 			controller: 'board.list.ctrl as vm',
 			// params : {boardType: 'board'}
-		})
-		.state('board.page', {
-			url: '/page',
-			templateUrl: 'pages/board/page.html',
-			controller: 'board.page.ctrl as vm'
 		})
 		.state('board.create', {
 			url: '/create',
@@ -107,30 +224,20 @@ app.config(function ($stateProvider, $urlRouterProvider, $authProvider, $locatio
 			controller: 'board.edit.ctrl as vm'
 		})
 
-
-		// .state('list', {
-		// 	url: '/list?menu',
-		// 	templateUrl: 'pages/board/list.html',
-		// 	controller: 'board.list.ctrl as vm',
-		// 	// params : {boardType: 'board'}
-		// })
-		// .state('create', {
-		// 	url: '/create',
-		// 	templateUrl: 'pages/board/create.html',
-		// 	controller: 'board.create.ctrl as vm'
-		// })
-		// .state('view', {
-		// 	url: '/view/:articleId',
-		// 	templateUrl: 'pages/board/view.html',
-		// 	controller: 'board.view.ctrl as vm'
-		// })
-		// .state('edit', {
-		// 	url: '/edit/:articleId',
-		// 	templateUrl: 'pages/board/edit.html',
-		// 	controller: 'board.edit.ctrl as vm'
-		// })
-
-
+	// .state('join', {
+	// 	url: '/join',
+	// 	templateUrl: 'pages/join/join.html'
+	// })
+	// .state('join.new', {
+	// 	url: '/new',
+	// 	templateUrl: 'pages/join/join.new.html',
+	// 	controller: 'join.new.ctrl as vm'
+	// })
+	// .state('join.list', {
+	// 	url: '/list',
+	// 	templateUrl: 'pages/join/join.list.html',
+	// 	controller: 'join.list.ctrl as vm'
+	// })
 
 
 	$authProvider.httpInterceptor = function ($auth) {
@@ -178,8 +285,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $authProvider, $locatio
 
 app.run(function ($rootScope, $state, $stateParams, $http, $window, $auth, appContextService) {
 
-	appContextService.context.user = JSON.parse($window.localStorage.getItem('token'));
-	$rootScope.user = JSON.parse($window.localStorage.getItem('token'));
+	appContextService.context.user = JSON.parse($window.localStorage.getItem('token'))
 
 	$rootScope.$stateParams = $stateParams
 	$rootScope.$state = $state

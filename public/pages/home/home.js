@@ -15,8 +15,8 @@ app.controller('home.ctrl', function ($scope, boardService, config) {
         $scope.currentPage = page;
         boardService.load('mlrnactivites', 1, 5, '').then(
             function (results) {
-                console.log(results);
-                console.log(results.data.list);
+                // console.log(results);
+                // console.log(results.data.list);
 
                 $scope.slides = results.data.list;
                 // // slide가 int type id를 필요로 함
