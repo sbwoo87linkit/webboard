@@ -5,10 +5,10 @@
                 <span class="fw-100 w3-text-white">{{vm.appContext.appTitle}}</span>
             </a>
         </div>
-         {{vm.appContext.email}}
+         <span ng-if="vm.appContext.email">E-mail :</span>    {{vm.appContext.email}}
          <br> {{vm.appContext.address}}
 
-        E-mail : mlrn_korea@korea.ac.kr
-        <br> (02841) #L502 Life and Science West Bldg, Korea University, Anam-ro 145, Seoul, KOREA
+        <!-- E-mail : mlrn_korea@korea.ac.kr
+        <br> (02841) #L502 Life and Science West Bldg, Korea University, Anam-ro 145, Seoul, KOREA -->
     </div>
 </div>

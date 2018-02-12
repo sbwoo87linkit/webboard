@@ -50,6 +50,7 @@ module.exports = function (app) {
 
     app.get('/board', board.list);
     app.get('/board/:sid', board.view);
+    app.get('/board/page/:articleType', board.pageview);
     app.post('/board', board.create);
     app.put('/board/:sid', board.update);
     app.delete('/board/:sid', board.delete);

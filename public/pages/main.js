@@ -3,6 +3,9 @@ app.controller('main.ctrl', function ($scope, userService, appContextService, to
     var vm = this;
     vm.appContext = appContextService.context;
     vm.appContext.appTitle = config.appTitle;
+    vm.appContext.email = config.email;
+    vm.appContext.address = config.address;
+    vm.appContext.apiUrl = config.apiUrl;
 
     // console.log('config', config)
     vm.appContext.menuArray = config.menuArray;

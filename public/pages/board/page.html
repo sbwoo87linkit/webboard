@@ -1,49 +1,43 @@
-<h2  class="w3-theme-text"> {{ $stateParams.title }} <small> - View</small></h2>
+<h2 class="w3-theme-text"> {{ $stateParams.sub_menu | uppercase }}</h2>
 
+<p ng-if="!vm.item" class="bg-warning w3-padding">No data.</p>
 
-<div class="row bottom-line">
-    <div class="col-md-2"><strong>Share with public board </strong></div>
+<div ng-bind-html="vm.item.content" style="min-height:300px;white-space: pre-line; font-size: small; margin-top: 0px">
+</div>
+
+<div class="row bottom-line" ng-if="vm.item.images.length">
+    <div class="col-md-2">
+        <strong>Images</strong>
+    </div>
     <div class="col-md-10">
-        <span class="badge" ng-style="{true: {background: 'green'}, false: {background: '#999'}}[item.share]">{{item.share ? 'Share' : 'Not share'}}</span>
+        <!-- <img ng-src="{{vm.appContext.apiUrl + image.url}}" alt="" ng-repeat="image in vm.item.images" style="width:80%; max-width:80%; height: auto; margin:10px 0px;"> -->
+        <img ng-src="{{vm.appContext.apiUrl + image.url}}" alt="" ng-repeat="image in vm.item.images" style="max-width:120px; height: auto; margin:10px 0px;">
+        <a ng-href="{{ vm.appContext.apiUrl + image.url }}" target="_blank">Download {{vm.appContext.apiUrl + image.url}}</a>
+
+
     </div>
 </div>
-<div class="row bottom-line">
-    <div class="col-md-2"><strong>Title </strong></div>
-    <div class="col-md-10">{{item.title}}</div>
-</div>
-<div class="row bottom-line">
-    <div class="col-md-2"><strong>Date</strong></div>
-    <div class="col-md-10">{{item.date | date :  "y.MM.dd"}}</div>
-</div>
-<div class="row bottom-line">
-    <div class="col-md-2"><strong>Content </strong></div>
+<div class="row bottom-line" ng-if="vm.item.files.length">
+    <div class="col-md-2">
+        <strong>Files </strong>
+    </div>
     <div class="col-md-10">
-            <div ng-bind-html="item.content" style="white-space: pre-line; font-size: small; margin-top: 0px">
-            </div>
+        <div ng-repeat="file in vm.item.files"> {{ file.url }} -
+            <a ng-href="{{ file.url }}" target="_blank">Download</a>
         </div>
+    </div>
+</div>
 
-</div>
-<div class="row bottom-line" ng-if="item.images.length">
-    <div class="col-md-2"><strong>Images</strong></div>
-    <div class="col-md-10">
-        <img ng-src="{{apiUrl + image.url}}" alt="" ng-repeat="image in item.images" style="width:80%; max-width:80%; height: auto; margin:10px 0px;">
-    </div>
-</div>
-<div class="row bottom-line" ng-if="item.files.length">
-    <div class="col-md-2"><strong>Files </strong></div>
-    <div class="col-md-10">
-        <div ng-repeat="file in item.files"> {{ file.url }} - <a ng-href="{{ file.url }}" target="_blank">Download</a></div>
-    </div>
-</div>
 
 
 <div class="text-right">
-    <button class="btn btn-default" ng-click="goBack()">Back</button>
-    <button class="btn btn-primary"
-            ng-if="user.role === 'admin'"
-            ui-sref="board.edit( {'articleType':$stateParams.articleType, 'articleId':$stateParams.articleId })">Edit
+    <button type="button" style="margin-left: 20px;" class="btn btn-success" ng-if="!vm.item && vm.appContext.user.role === 'admin'" ui-sref="board.create({'articleType': $stateParams.articleType})">
+        New
     </button>
-    <button class="btn btn-danger"  ng-if="user.role === 'admin'" ng-click="delete()">Delete</button>
+    <!-- <button class="btn btn-default" ng-click="goBack()">Back</button> -->
+    <button class="btn btn-primary" ng-if="vm.item && vm.appContext.user.role === 'admin'" ui-sref="board.edit( {'articleType':$stateParams.articleType, 'articleId':vm.item._id })">Edit
+    </button>
+    <button class="btn btn-danger" ng-if="vm.item && vm.appContext.user.role === 'admin'" ng-click="delete(vm.item._id)">Delete</button>
 </div>
 
 <!-- <div disqus="id"></div> -->

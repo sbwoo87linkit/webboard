@@ -1,10 +1,10 @@
 app.constant('config', {
     appName: 'My App',
     appVersion: 1.0,
-    // appTitle: 'Mid-Latitude Region Network',
+    // appTitle: 'Web Board v1.0',
+    appTitle: 'Mid-Latitude Region Network',
     email: 'mlrn_korea@korea.ac.kr',
     address: '(02841) #L502 Life and Science West Bldg, Korea University, Anam-ro 145, Seoul, KOREA',
-    appTitle: 'Web Board v1.0',
     apiUrl: 'http://127.0.0.1:1337',
     // apiUrl: 'http://ec2-13-125-112-144.ap-northeast-2.compute.amazonaws.com',
     menuArray: [
@@ -124,6 +124,7 @@ app.constant('config', {
                 {
                     name: 'mlrn activities',
                     mode: 'board',
+                    mustHaveImage: true,
                 },
             ]
 

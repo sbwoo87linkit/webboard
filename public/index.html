@@ -66,9 +66,6 @@
     <div class="row">
       <div ng-if="!$state.is('home') && !$state.is('signin') && !$state.is('signup')" class="col-md-3" ng-include="'pages/sidebar.html'"></div>
       <div class="" ng-class="($state.is('home') || $state.is('signin') || $state.is('signup')) ? 'col-md-12' : 'col-md-9'">
-        <div class="w3-pink">
-          {{$state.current.name}} $state.is('home') : {{$state.is('home')}}
-        </div>
         <div ui-view class="content"></div>
       </div>
     </div>

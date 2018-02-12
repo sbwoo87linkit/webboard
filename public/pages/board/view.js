@@ -1,6 +1,8 @@
 
-app.controller('board.view.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService,  toastr, $location, $ngConfirm, config) {
+app.controller('board.view.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService, toastr, $location, $ngConfirm, config, appContextService) {
 
+    var vm = this;
+    vm.appContext = appContextService.context;
     // if ($stateParams.articleType === 'un-sdsn') $scope.viewTitle = "UN SDSN 소식";
     // if ($stateParams.articleType === 'korea-sdsn') $scope.viewTitle = "Korea SDSN 소개";
 

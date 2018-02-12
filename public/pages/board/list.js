@@ -1,18 +1,18 @@
 
-app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService, appContextService, toastr, $log,  config, $ngConfirm) {
+app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService, appContextService, toastr, $log,  $ngConfirm) {
 
     var vm = this;
     vm.appContext = appContextService.context;
     // console.log('board.list.ctrl ... $stateParams.menu', $stateParams.menu)
 
 
-    vm.apiUrl = config.apiUrl;
+    // vm.apiUrl = config.apiUrl;
     // vm.boardType = menuService.get($stateParams).boardType;
     // $rootScope.menu = menuService.get($stateParams).menu;
     // vm.viewTitle = menuService.get($stateParams).boardTitle;
 
 
-    return;
+    // return;
 
 
     vm.data = { "searchText": "" };
@@ -21,7 +21,7 @@ app.controller('board.list.ctrl', function ($scope, $rootScope, $window, $stateP
         maxSize: 5,
         totalItems: 0,
         currentPage: 1,
-        itemsPerPage: 2,
+        itemsPerPage: 10,
 
     };
 

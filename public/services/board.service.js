@@ -9,6 +9,12 @@ app.factory('boardService', function ($http, config) {
         return $http.get(config.apiUrl + '/board?page=' + page + '&rows=' + pageSize + '&articleType=' + articleType + '&searchText=' + searchText);
     }
 
+    factory.getPage = function (articleType) {
+        return $http.get(config.apiUrl + '/board/page/' + articleType);
+    }
+
+
+
     factory.get = function (sid) {
         return $http.get(config.apiUrl + '/board/' + sid);
     }

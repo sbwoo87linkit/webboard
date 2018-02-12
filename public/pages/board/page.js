@@ -1,12 +1,12 @@
 
-app.controller('board.page.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService,  toastr, $location, $ngConfirm, config) {
+app.controller('board.page.ctrl', function ($scope, $rootScope, $window, $stateParams, boardService,  toastr, $location, $ngConfirm, appContextService, config) {
 
     // if ($stateParams.articleType === 'un-sdsn') $scope.viewTitle = "UN SDSN 소식";
     // if ($stateParams.articleType === 'korea-sdsn') $scope.viewTitle = "Korea SDSN 소개";
 
     // $rootScope.menu = $window.localStorage.getItem('menu');
     // $scope.viewTitle = $window.localStorage.getItem('boardTitle');
-    $scope.apiUrl = config.apiUrl;
+    // $scope.apiUrl = config.apiUrl;
 
     // $rootScope.menu = menuService.get($stateParams).menu;
     // $scope.viewTitle = menuService.get($stateParams).boardTitle;
@@ -14,7 +14,11 @@ app.controller('board.page.ctrl', function ($scope, $rootScope, $window, $stateP
     // console.log($rootScope.menu);
     // console.log($stateParams.articleType);
 
-    $scope.delete = function () {
+    var vm = this;
+    vm.appContext = appContextService.context;
+
+
+    $scope.delete = function (id) {
 
         $ngConfirm({
             boxWidth: '30%',
@@ -28,9 +32,10 @@ app.controller('board.page.ctrl', function ($scope, $rootScope, $window, $stateP
                     btnClass: 'btn-blue',
                     action: function (scope, button) {
 
-                        boardService.delete($stateParams.articleId).then(
+                        boardService.delete(id).then(
                             function (result) {
-                                window.history.back();
+                                // window.history.back();
+                                getPage();
                             }, function (err) {
                                 alert(err);
                             }
@@ -49,16 +54,19 @@ app.controller('board.page.ctrl', function ($scope, $rootScope, $window, $stateP
 
     }
 
-    // boardService.get($stateParams.articleId).then(
-    //     function (result) {
-    //         // console.log(result);
-    //         $scope.item = result.data;
-    //     }, function (err) {
-    //         console.log(err);
-    //     }
-    // )
+    var getPage = function() {
+        boardService.getPage($stateParams.sub_menu).then(
+            function (result) {
+                // console.log(result);
+                vm.item = result.data;
+            }, function (err) {
+                console.log(err);
+            }
+        )
+    }
 
-    // // console.log($location.$$url);
+    getPage();
+    // console.log($location.$$url);
     // $scope.id = $location.$$url;
 
 })

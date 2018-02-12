@@ -26,64 +26,6 @@ mongoClient.connect(config.connectionString, function (err, database) {
 
 exports.list = function (req, res) {
 
-
-
-    // async.series([
-    //         function (callback) {
-    //             // do some stuff ...
-    //             db.collection('board').count({
-    //                 $or: [{
-    //                     'articleType': req.query.articleType
-    //                 }, {
-    //                     share: true
-    //                 }]
-    //             }, function(err, count){
-    //                 console.log('series one');
-    //                 callback(null, count);
-
-    //             });
-
-    //         },
-    //         function (callback) {
-    //             console.log('series two');
-    //             // do some more stuff ...
-    //             callback(null, 'two');
-    //         }
-    //     ],
-    //     // optional callback
-    //     function (err, results) {
-    //         // results is now equal to ['one', 'two']
-    //         console.log('results', results)
-
-    //         if (req.query.articleType === 'notice') {
-    //             db.collection('board').find({
-    //                     $or: [{
-    //                         'articleType': req.query.articleType
-    //                     }, {
-    //                         share: true
-    //                     }]
-    //                 })
-    //                 .sort({
-    //                     date: -1
-    //                 }).skip(req.query.rows * (req.query.page - 1)).limit(Number(req.query.rows)).toArray(function (err, docs) {
-    //                     res.send(docs);
-    //                 })
-    //         } else {
-    //             db.collection('board').find({
-    //                     $or: [{
-    //                         'articleType': req.query.articleType
-    //                     }]
-    //                 })
-    //                 .sort({
-    //                     date: -1
-    //                 }).skip(req.query.rows * (req.query.page - 1)).limit(Number(req.query.rows)).toArray(function (err, docs) {
-    //                     res.send(docs);
-    //                 })
-    //         }
-
-
-    //     });
-
     async.waterfall([
         function (callback) {
             db.collection('board').count({
@@ -129,6 +71,18 @@ exports.list = function (req, res) {
 
 exports.view = function (req, res) {
     db.collection('board').findOne({ _id: ObjectID(req.params.sid) }, function(err, doc) {        
+        if (!err) {
+            res.json(doc);
+        }
+        res.status(500).end(err);
+    });
+}
+
+
+//'/board/page/' + articleType
+
+exports.pageview = function (req, res) {
+    db.collection('board').findOne({ 'articleType': req.params.articleType }, function (err, doc) {
         if (!err) {
             res.json(doc);
         }

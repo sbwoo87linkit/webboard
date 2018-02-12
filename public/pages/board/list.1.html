@@ -114,7 +114,7 @@
 <!-- {{vm.items}} -->
 <table class="table table-hover w3-margin-top">
     <tr ng-repeat="item in vm.items" ui-sref="board.view({'articleType': item.articleType, 'articleId':item._id})" style="cursor:pointer">
-        <td style="white-space:nowrap">{{item.date | date : "y.MM.dd HH:mm"}}</td>
+        <td style="white-space:nowrap">{{item.date | date : "y.MM.dd hh:mm"}}</td>
         <td style="width:100%">{{item.title}}</td>
     </tr>
 </table>
